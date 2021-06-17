@@ -8,3 +8,4 @@ chatbot-cli*
 chatbot-gui*
 Dockerfile
 docker-compose*
+test_*
