@@ -3,6 +3,8 @@
 
 from flask import Flask, render_template, request, flash
 from chatbot_ai import chatbot_ai
+from pathlib import Path
+
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'Pa$$w0rd'
@@ -21,5 +23,6 @@ def index():
             bot = chatbot_ai("v3/intents.json")
             bot.set_Message(chatbot_input)
             chatbot_label = bot.get_Response()
-
-    return render_template('chatbot.html', chatbot_label=chatbot_label)
+    p = Path(__file__).parent / 'templates'
+    template = str(p.joinpath("/chatbot.html"))
+    return render_template(template, chatbot_label=chatbot_label)

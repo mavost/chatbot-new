@@ -7,4 +7,5 @@ ressources
 chatbot-cli*
 chatbot-gui*
 Dockerfile
+docker-compose.yml
 docker-compose*

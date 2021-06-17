@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import nltk
 import silence_tensorflow.auto
 import pickle
 import numpy
@@ -15,7 +14,6 @@ from nltk.tokenize import word_tokenize
 
 class chatbot_ai:
     def __init__(self, jsonFile):
-        nltk.download("punkt", quiet=True)
         self.stemmer = LancasterStemmer()
 
         with open(jsonFile) as file:
