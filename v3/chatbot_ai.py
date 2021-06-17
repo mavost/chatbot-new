@@ -20,7 +20,7 @@ class chatbot_ai:
             self.data = json.load(file)
 
         try:
-            with open("model/data.pickle", "rb") as f:
+            with open("v3/model/data.pickle", "rb") as f:
                 self.words, self.labels, training, output = pickle.load(f)
         except Exception:
             self.words = []
@@ -67,7 +67,7 @@ class chatbot_ai:
             training = numpy.array(training)
             output = numpy.array(output)
 
-            with open("model/data.pickle", "wb") as f:
+            with open("v3/model/data.pickle", "wb") as f:
                 pickle.dump((self.words, self.labels, training, output), f)
 
         tensorflow.compat.v1.reset_default_graph()
@@ -81,16 +81,16 @@ class chatbot_ai:
         self.model = tflearn.DNN(net)
 
         try:
-            self.model.load("model/model.tflearn")
+            self.model.load("v3/model/model.tflearn")
         except Exception:
             self.model = tflearn.DNN(net)
             self.model.fit(training, output, n_epoch=1000, batch_size=8, show_metric=True)
-            self.model.save("model/model.tflearn")
+            self.model.save("v3/model/model.tflearn")
 
-    def bag_of_words(self, s):
+    def bag_of_words(self):
         bag = [0 for _ in range(len(self.words))]
 
-        s_words = word_tokenize(s)
+        s_words = word_tokenize(self.message)
         s_words = [self.stemmer.stem(word.lower()) for word in s_words]
 
         for se in s_words:
@@ -104,7 +104,7 @@ class chatbot_ai:
         self.message = str(message)
 
     def get_Response(self):
-        results = self.model.predict([self.bag_of_words(self.message, self.words)])
+        results = self.model.predict([self.bag_of_words()])
         results_index = numpy.argmax(results)
         tag = self.labels[results_index]
 
