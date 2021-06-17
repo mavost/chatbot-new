@@ -2,8 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from flask import Flask, render_template, request, flash
-from chatbot import Chatbot
-from file_handling import file_handling
+from chatbot_ai import chatbot_ai
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'Pa$$w0rd'
@@ -11,12 +10,7 @@ app.config['SECRET_KEY'] = 'Pa$$w0rd'
 
 @app.route('/', methods=('GET', 'POST'))
 def index():
-    file = file_handling("answers.json")
     chatbot_label = "Hallo, worüber wollen Sie sprechen?"
-
-    # Listen
-    zufallsantworten = file.zufallsantworten
-    reaktionen = file.reaktionen
 
     # Logik
     if request.method == 'POST':
@@ -24,7 +18,7 @@ def index():
         if not chatbot_input:
             flash("Ohne Frage kann ich nicht antworten")
         else:
-            bot = Chatbot(reaktionen, zufallsantworten)
+            bot = chatbot_ai("v3/intents.json")
             bot.set_Message(chatbot_input)
             chatbot_label = bot.get_Response()
 
