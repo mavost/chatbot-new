@@ -7,7 +7,7 @@ from file_handling import file_handling
 
 def main():
     # Listen
-    file = file_handling("answers.json")
+    file = file_handling("v2/answers.json")
     zufallsantworten = file.zufallsantworten
     reaktionen = file.reaktionen
 

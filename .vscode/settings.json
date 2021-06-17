@@ -1,3 +1,4 @@
 {
-    "python.pythonPath": "/home/lokaleradmin/Dokumente/Python/chatbot_new/.venv/bin/python"
+    "python.pythonPath": "/home/lokaleradmin/Dokumente/Python/chatbot_new/.venv/bin/python",
+    "python.analysis.extraPaths": ["v2", "v3"]
 }

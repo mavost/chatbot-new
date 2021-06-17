@@ -17,7 +17,7 @@ from file_handling import file_handling
 class Ui_MainWindow(object):
 
     def Button_Los_click(self):
-        file = file_handling("answers.json")
+        file = file_handling("v2/answers.json")
         zufallsantworten = file.zufallsantworten
         reaktionen = file.reaktionen
 
