@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+import logging
 from flask import Flask, render_template, request, flash
 from chatbot_ai import chatbot_ai
 from pathlib import Path
@@ -8,6 +9,9 @@ from pathlib import Path
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'Pa$$w0rd'
+
+logging.basicConfig(filename="webgui-dev.log", level=logging.DEBUG)
+logging.debug("Debug-Session gestartet")
 
 
 @app.route('/', methods=('GET', 'POST'))
@@ -26,3 +30,7 @@ def index():
     p = Path(__file__).parent / 'templates'
     template = str(p.joinpath("/chatbot.html"))
     return render_template(template, chatbot_label=chatbot_label)
+
+
+if __name__ == '__main__':
+    app.run(debug=True, host='0.0.0.0')
